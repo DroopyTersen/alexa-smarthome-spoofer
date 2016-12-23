@@ -9,6 +9,7 @@
   "author": "Andrew Petersen",
   "license": "ISC",
   "dependencies": {
+    "droopy-iot": "^2.1.4",
     "node-ssdp": "^3.0.0-beta2",
     "wemore": "^0.3.0"
   }
