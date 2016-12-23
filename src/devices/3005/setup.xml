@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<root>
+  <device>
+    <deviceType>urn:DroopyDevice:device:controllee:1</deviceType>
+    <friendlyName>fish tank</friendlyName>
+    <manufacturer>Belkin International Inc.</manufacturer>
+    <modelName>Droopy Smart Socket</modelName>
+    <modelNumber>0.1</modelNumber>
+    <UDN>uuid:Socket-1_0-20161222110400</UDN>
+  </device>
+</root>

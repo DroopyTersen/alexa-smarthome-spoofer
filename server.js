@@ -1,38 +1,38 @@
-var dgram = require("dgram");
-var config = {
-    ip: "239.255.255.250",
-    port: 1900
-};
+// var devices = [
+//     {
+//         host: "http://192.168.1.216",
+//         port: 9999,
+//         name: "fish tank",
+//         id: "6698b880-cf96-4ce6-b27f-bc9ea5f5c3bd"
+//     }
+// ];
 
-function createSocket() {
+// var DeviceServer = require("./src/deviceServer");
+// var server = require("./src/uPnPServer");
+// server.start(devices);
+// var deviceServer = new DeviceServer(devices[0]);
 
-    var socket = dgram.createSocket({
-        type: 'udp4',
-        reuseAddr: true
-    })
-    socket.bind(config.port);
+var wemore = require('wemore');
 
-    socket.on('message', function onSocketMessage(msg, req) {
-        msg = msg.toString();
-        if (msg.startsWith("M-SEARCH")) handleDeviceSearch(msg, req)
-    });
+// note that each device needs a separate port:
+var tv = wemore.Emulate({friendlyName: "TV", port: 9001}); // choose a port
+var stereo = wemore.Emulate({friendlyName: "Stereo", port: 5001}); // automatically assigned
 
-    socket.on('listening', function () {
-        console.log("Joining UPnP Multicast group...")
-        try {
-            socket.addMembership(config.ip);
-            socket.setMulticastTTL(1)
-            console.log("Success");
-        } catch (e) {
-            console.log("Unable to join multicast group for UPnP")
-            console.log(e);
-        }
-    })
+stereo.on('listening', function() {
+    // if you want it, you can get it:
+    console.log("Stereo listening on", this.port);
+});
 
- 
-    var handleDeviceSearch = function(msg, req) {
-        console.log(msg);
-    }
-}
+tv.on('state', function(binaryState) {
+    console.log("TV set to=", binaryState);
+    tv.close(); // stop advertising the device
+});
 
-createSocket();
+// also, 'on' and 'off' events corresponding to binary state
+stereo.on('on', function() {
+    console.log("Stereo turned on");
+});
+
+stereo.on('off', function() {
+    console.log("Stereo turned off");
+});
