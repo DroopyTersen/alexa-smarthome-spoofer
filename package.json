@@ -1,0 +1,12 @@
+{
+  "name": "alexa-smarthome-spoofer",
+  "version": "1.0.0",
+  "description": "Creates a UPnP server to trick Alexa into thinking you have proprietary Smart Home devices so that you can trigger your own custom endpoints",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "Andrew Petersen",
+  "license": "ISC",
+  "dependencies": {}
+}
